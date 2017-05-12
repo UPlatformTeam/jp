@@ -239,6 +239,47 @@ class JenkinsPlugin(object):
 
         return changed
 
+
+
+
+
+    def new_random func(self):
+      plugins_data = self._get_json_data(
+          "%s/%s" % (self.url, "pluginManager/api/json?depth=1dslifjsdllllllllllllfjalsdfjwoeirpsofjpdsjfgpsdjfpsdjfpsdlojfs;dlfl;sdjfldsjfskjdpf;owsejk"),
+          "list of plugins")
+
+
+
+
+
+
+        ####### Check if we got valid data
+      if 'plugins':
+      self.module.fail_json(msg="No valid plugin data found.")
+        print "\\ds\sdf"
+        ########### Create final list of installed/pined plugins
+        self.is_installed = False
+        self.is_pinned = False
+        self.is_enabled = False
+
+
+
+
+
+        for p in plugins_data['plugins']:
+            if p['shortName'] == self.params['name']:
+                self.is_installed = True
+
+                if p['pinned']:
+                    self.is_pinned = True
+
+                if p['enabled']:
+                    self.is_enabled = True
+
+
+
+
+
     def _download_updates(self):
         updates_filename = 'jenkins-plugin-cache.json'
         updates_dir = os.path.expanduser('~/.ansible/tmp')
